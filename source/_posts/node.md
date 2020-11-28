@@ -1,5 +1,5 @@
 ---
-title: Node JS (red escolhe o titulo kk)
+title: Como instalar nodejs no Ubuntu e derivados
 date: 2020/11/28
 author: Redson
 ---

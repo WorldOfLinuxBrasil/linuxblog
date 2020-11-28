@@ -1,5 +1,5 @@
 ---
-title: yay (red escolhe o titulo kk)
+title: Yay AUR de forma mais simples
 date: 2020/11/28
 author: Redson
 ---
