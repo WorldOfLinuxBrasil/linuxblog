@@ -5,13 +5,14 @@
   "scripts": {
     "build": "hexo generate",
     "clean": "hexo clean",
-    "deploy": "hexo deploy",
+    "deploy": "gh-pages -d public",
     "server": "hexo server"
   },
   "hexo": {
     "version": "5.2.0"
   },
   "dependencies": {
+    "gh-pages": "^3.1.0",
     "hexo": "^5.0.0",
     "hexo-generator-archive": "^1.0.0",
     "hexo-generator-category": "^1.0.0",
