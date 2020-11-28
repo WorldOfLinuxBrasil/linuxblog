@@ -1,5 +1,5 @@
 ---
-title: Uso e Instalação do iwd
+title: Iwd, uma simples alternativa ao network manager
 date: 2020/11/28
 author: Redson
 ---
