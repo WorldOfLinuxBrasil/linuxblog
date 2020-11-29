@@ -72,6 +72,5 @@ executar a atualização de pacotes:
 
 **
 
-**Revisado por: Daki**
 
 **
