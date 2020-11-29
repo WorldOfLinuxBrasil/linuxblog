@@ -13,8 +13,8 @@ timezone: 'Brazil/East'
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://example.com/child' and root as '/child/'
-url: https://worldoflinuxbrasil.github.io/
-root: /linuxblog/
+url: http://blog.worldoflinux.xyz/ 
+root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
