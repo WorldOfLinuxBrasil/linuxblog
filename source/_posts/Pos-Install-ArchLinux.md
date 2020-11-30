@@ -3,8 +3,6 @@ title: Pós instalação Arch Linux
 date: 2020/11/29
 author: Drack
 ---
-# Pós instalação Arch Linux
-
 ## Configurar o sudo para seu usuário
 
 Por padrão o Arch linux não vem com o sudo instalado, para podermos instalar e configurar ele nós entramos como root e escrevemos no terminal:
