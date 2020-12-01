@@ -25,3 +25,4 @@ Mode 8 - Esconde módulo dev9 (Corrige problemas no Need for Speed Underground _
 --------------------------------------------------------------------------------------------------------
 Site com passo a passo: (https://abre.ai/ps2-opl-tutor)                                                                                                                                                     
 ---------------------------------------------------------------------
+![Imagem](https://media.discordapp.net/attachments/765627581340581908/783367312015097886/OPLM_V18_04.png)
