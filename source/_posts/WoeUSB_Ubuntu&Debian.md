@@ -1,3 +1,9 @@
+---
+title: Pen Drive Bootável De Windows 10 em Debian/Ubuntu
+date: 2020/12/02
+author: Drack
+---
+
 # Pen Drive Bootável De Windows 10
 
 ## Avisos!
