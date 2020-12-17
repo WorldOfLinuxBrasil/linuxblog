@@ -1,4 +1,0 @@
-#+TITLE: 222222 
-#+AUTHOR: Lin Diniz
-#+LAYOUT: post
-#+TAGS: hexo, org-mode

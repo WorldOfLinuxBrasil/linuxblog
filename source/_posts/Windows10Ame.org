@@ -2,6 +2,7 @@
 #+AUTHOR: Lin Diniz
 #+LAYOUT: post
 #+TAGS: hexo, org-mode
+#+DATE: <2020-12-17 Thu 11:45>
 #+LATEX_HEADER_EXTRA:  \usepackage{mdframed}
 #+LATEX_HEADER_EXTRA: \BeforeBeginEnvironment{minted}{\begin{mdframed}}
 #+LATEX_HEADER_EXTRA: \AfterEndEnvironment{minted}{\end{mdframed}}
@@ -12,12 +13,8 @@
  permite ao usuário remover toda caca do sistema operacional
 
 *** *Por que usar o windows ame?*
-Alem de você Poder desfrutar de um sistema leve sem nenhuma caca da microsof
-t , você acaba removendo todos os SpyWare do sistema mais os bloatware que
-pesam o sistema sem motivo
-Alem de você poder desfrutar de um sistema leve sem nenhuma caca da microsoft
- , você acaba removendo todos os SpyWare do sistema mais os bloatware que
-pesam o sist      ema sem motivo
+Alem de você Poder desfrutar de um sistema leve sem nenhuma caca da microsoft
+,você acaba removendo todos os SpyWare do sistema mais os bloatware que pesam o sistema sem motivo
 ** Baixando a iso
 Primeiro temos que baixar o sistema DIRETAMENTE da microsoft
 para fazer isso utilize  [[https://tb.rg-adguard.net/public.php][Este Link]] para baixar la direto dos
