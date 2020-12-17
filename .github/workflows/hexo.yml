@@ -6,7 +6,8 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@master
-
+      with:
+        ref: master
     - name: Build and Deploy
       uses: WorldOfLinuxBrasil/action-linuxblog@master
       env:
