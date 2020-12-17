@@ -1,3 +1,3 @@
 [submodule "themes/cactus"] 
-  path = path_to_submodule 
+  path = themes/cactus
   url = git@github.com:WorldOfLinuxBrasil/hexo-theme-cactus-custom.git
