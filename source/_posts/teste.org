@@ -1,4 +1,4 @@
-#+TITLE: Como instalar Windows 10 AME
+#+TITLE: 222222 
 #+AUTHOR: Lin Diniz
 #+LAYOUT: post
 #+TAGS: hexo, org-mode
