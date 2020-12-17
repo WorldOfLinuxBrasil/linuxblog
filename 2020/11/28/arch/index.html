@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang=pt>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Arch Linux, é uma distribuição Linux para computadores com arquitetura 64 bits, desenvolvido inicialmente pelo canadense Judd Vinet. Esse sistema operacional se apresenta de maneira diferente de outro">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Instalação Arch Linux">
+<meta property="og:url" content="http://blog.worldoflinux.xyz/2020/11/28/arch/index.html">
+<meta property="og:site_name" content="World Of Linux Blog">
+<meta property="og:description" content="Arch Linux, é uma distribuição Linux para computadores com arquitetura 64 bits, desenvolvido inicialmente pelo canadense Judd Vinet. Esse sistema operacional se apresenta de maneira diferente de outro">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:image" content="https://miro.medium.com/max/2508/1*y0tS-2m4E7k92RBDuR__PA.png">
+<meta property="og:image" content="https://www.blogdainformatica.com.br/wp-content/uploads/2015/10/Grub-Reinstalando-Corrigindo-Atualizando.jpg">
+<meta property="article:published_time" content="2020-11-28T03:00:00.000Z">
+<meta property="article:modified_time" content="2020-12-17T14:54:08.810Z">
+<meta property="article:author" content="Lin Diniz">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://miro.medium.com/max/2508/1*y0tS-2m4E7k92RBDuR__PA.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Instalação Arch Linux</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="World Of Linux Blog" type="application/atom+xml" />
+    
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Início</a></li>
+         
+          <li><a href="/about/">Sobre</a></li>
+         
+          <li><a href="/archives/">Artigos</a></li>
+         
+          <li><a href="/projects_url">Projetos</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2020/11/29/Pos-Install-ArchLinux/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2020/11/28/iwd/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Seguinte</span>
+      <span id="i-top" class="info" style="display:none;">Acima</span>
+      <span id="i-share" class="info" style="display:none;">Compartihar Post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://blog.worldoflinux.xyz/2020/11/28/arch/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://blog.worldoflinux.xyz/2020/11/28/arch/&text=Instalação Arch Linux"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://blog.worldoflinux.xyz/2020/11/28/arch/&title=Instalação Arch Linux"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.worldoflinux.xyz/2020/11/28/arch/&is_video=false&description=Instalação Arch Linux"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Instalação Arch Linux&body=Check out this article: http://blog.worldoflinux.xyz/2020/11/28/arch/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://blog.worldoflinux.xyz/2020/11/28/arch/&title=Instalação Arch Linux"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://blog.worldoflinux.xyz/2020/11/28/arch/&title=Instalação Arch Linux"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://blog.worldoflinux.xyz/2020/11/28/arch/&title=Instalação Arch Linux"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://blog.worldoflinux.xyz/2020/11/28/arch/&title=Instalação Arch Linux"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://blog.worldoflinux.xyz/2020/11/28/arch/&name=Instalação Arch Linux&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://blog.worldoflinux.xyz/2020/11/28/arch/&t=Instalação Arch Linux"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Vale-ressaltar-que"><span class="toc-number">1.</span> <span class="toc-text">Vale ressaltar que</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Baixando-a-ISO-de-instalacao"><span class="toc-number">2.</span> <span class="toc-text">Baixando a ISO de instalação</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Iniciando-o-ambiente-em-modo-live"><span class="toc-number">3.</span> <span class="toc-text">Iniciando o ambiente em modo live</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Definindo-o-Layout-do-teclado"><span class="toc-number">4.</span> <span class="toc-text">Definindo o Layout do teclado:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conectar-a-internet"><span class="toc-number">5.</span> <span class="toc-text">Conectar à internet</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Atualizar-o-Relogio-do-sistema"><span class="toc-number">5.0.1.</span> <span class="toc-text">Atualizar o Relógio do sistema</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Particionamento"><span class="toc-number">6.</span> <span class="toc-text">Particionamento</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Formatar-as-particoes"><span class="toc-number">6.1.</span> <span class="toc-text">Formatar as partições</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Montando-as-particoes"><span class="toc-number">6.2.</span> <span class="toc-text">Montando as partições</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Instalacao"><span class="toc-number">7.</span> <span class="toc-text">Instalação</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Instalar-os-pacotes-essenciais"><span class="toc-number">7.1.</span> <span class="toc-text">Instalar os pacotes essenciais</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Configuracao-do-sistema"><span class="toc-number">8.</span> <span class="toc-text">Configuração do sistema</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#obs-substitua-seu-layout-pelo-layout-do-seu-teclado-por-exemplo-echo-KEYMAP-br-abnt2-gt-gt-etc-vconsole-conf"><span class="toc-number">8.0.0.1.</span> <span class="toc-text">obs: substitua seu_layout pelo layout do seu teclado, por exemplo: # echo KEYMAP&#x3D;br-abnt2 &gt;&gt; &#x2F;etc&#x2F;vconsole.conf</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Grub-em-maquinas-Bios-Legacy"><span class="toc-number">8.1.</span> <span class="toc-text">Grub em máquinas Bios Legacy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GRUB-em-sistema-UEFI"><span class="toc-number">8.2.</span> <span class="toc-text">GRUB em sistema UEFI</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Configuracao-do-Grub-BIOS-EFI"><span class="toc-number">9.</span> <span class="toc-text">Configuração do Grub BIOS&#x2F;EFI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Grub-instalado-mas%E2%80%A6-e-a-internet"><span class="toc-number">10.</span> <span class="toc-text">Grub instalado, mas… e a internet ?</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Instalação Arch Linux
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Redson</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-11-28T03:00:00.000Z" itemprop="datePublished">2020-11-28</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>Arch Linux, é uma distribuição Linux para computadores com arquitetura 64 bits, desenvolvido inicialmente pelo canadense Judd Vinet. Esse sistema operacional se apresenta de maneira diferente de outros, como Windows e MacOS. Ele tem como objetivo dar ao usuário total controle sobre o seu computador, e é conhecido por ser “aquilo que o usuário quer que ele seja”. Sabendo disso podemos iniciar com o Guia de instalação.</p>
+<h2 id="Vale-ressaltar-que"><a href="#Vale-ressaltar-que" class="headerlink" title="Vale ressaltar que"></a>Vale ressaltar que</h2><ol>
+<li> É de alta recomendação que leia a <strong>Wiki Oficial do Arch Linux, ela te ajudará muito</strong>.</li>
+<li> Neste guia só irei apresentar o básico do Arch Linux, desde a instalação até um sistema com interface gráfica</li>
+<li> Este guia não é para dual-boot, e, se possível, teste em uma máquina virtual antes de tentar em seu computador.</li>
+<li> Não digite os <code>**#**</code> dos comandos, eles são apenas para informar que os comandos estão sendo executados como root.</li>
+</ol>
+<h2 id="Baixando-a-ISO-de-instalacao"><a href="#Baixando-a-ISO-de-instalacao" class="headerlink" title="Baixando a ISO de instalação"></a>Baixando a ISO de instalação</h2><p> Para poder prosseguir, você deve baixar a ISO de instalação do Arch Linux, que é levíssimo, possuindo apenas 700 MB de tamanho <a target="_blank" rel="noopener" href="https://www.archlinux.org/download/">Baixe a ISO clicando aqui</a>.</p>
+<p> Após ter efetuado o Download, crie um pendrive bootável com seu programa favorito, eu particularmente recomendo o <a target="_blank" rel="noopener" href="https://www.balena.io/etcher/">Balena Etcher</a>.</p>
+<hr>
+<h2 id="Iniciando-o-ambiente-em-modo-live"><a href="#Iniciando-o-ambiente-em-modo-live" class="headerlink" title="Iniciando o ambiente em modo live"></a>Iniciando o ambiente em modo live</h2><p> A partir do seu menu de boot, selecione o dispositivo que você colocou a ISO de instalação do Arch Linux, quando isso acontecer, você será redirecionado para uma tela parecida com esta:</p>
+<p><img src="https://miro.medium.com/max/2508/1*y0tS-2m4E7k92RBDuR__PA.png" alt="Tela do Grub Arch Linux"></p>
+<p> Caso você esteja dando boot em UEFI, verá uma tela mais simplificada, mas será algo do mesmo estilo. Normalmente é só selecionar a primeira opção e dar enter ;)</p>
+<hr>
+<h2 id="Definindo-o-Layout-do-teclado"><a href="#Definindo-o-Layout-do-teclado" class="headerlink" title="Definindo o Layout do teclado:"></a>Definindo o Layout do teclado:</h2><p> Este passo consiste em informar pro sistema qual o layout do seu teclado, caso seu teclado seja americano (US), você não precisa seguir esses passos.</p>
+<hr>
+<p> Todos os layouts de teclado disponíveis podem ser listados com o seguinte comando:</p>
+<pre><code># ls /usr/share/kbd/keymaps/**/*.map.gz</code></pre>
+<p> Para modificar o layout para o padrão brasileiro (ABNT-2) utilize o comando:</p>
+<pre><code>loadkeys br-abnt2</code></pre>
+<p> Ou para definir para um layout de teclado de português de Portugal:</p>
+<pre><code>loadkeys pt-latin1</code></pre>
+<hr>
+<h2 id="Conectar-a-internet"><a href="#Conectar-a-internet" class="headerlink" title="Conectar à internet"></a>Conectar à internet</h2><ul>
+<li>  Se você usa internet cabeada, certifique-se de que ela foi configurada com sucesso utilizando o comando <code># ip link</code></li>
+<li>  Para conexões sem fio utilize o comando <a target="_blank" rel="noopener" href="https://www.cafecomterminal.cf/2020/11/iwd-um-curioso-utilitario-de-wi-fi.html">iwctl</a></li>
+<li>  Certifique-se que está conectado a internet <code># ping duck.com</code></li>
+</ul>
+<hr>
+<h4 id="Atualizar-o-Relogio-do-sistema"><a href="#Atualizar-o-Relogio-do-sistema" class="headerlink" title="Atualizar o Relógio do sistema"></a>Atualizar o Relógio do sistema</h4><p> Use o comando <code># timedatectl set-ntp true</code> para garantir que o relógio do sistema esteja configurado corretamente.</p>
+<hr>
+<h2 id="Particionamento"><a href="#Particionamento" class="headerlink" title="Particionamento"></a>Particionamento</h2><p> Está na hora de particionar seu sistema, e montar todas as partições.</p>
+<p> Primeiro use o comando <code># fdisk -l</code> para listar todos os discos e partições do sistema. Agora você é capaz de ver todos os seus discos e partições, no meu caso, estou em uma máquina virtual, onde o disco tem 10 GB e nenhuma partição.</p>
+<hr>
+<p> Eu particularmente prefiro o particionamento a partir do cfdisk, faça isso utilizando o comando <code>cfdisk</code>.</p>
+<p> As seguintes partições são exigidas para instalação do Arch Linux:</p>
+<ul>
+<li>  Uma partição para a raiz do sistema <code>/</code>.</li>
+<li>  Para iniciar a partir de um sistema Uefi: uma partição de sistema EFI</li>
+</ul>
+<p><strong>Exemplos de particionamento:</strong></p>
+<p><strong>Bios com MBR</strong></p>
+<p>Ponto de montagem</p>
+<p>Partição</p>
+<p>Tamanho sugerido</p>
+<p>[SWAP]</p>
+<p>/dev/partição_swap</p>
+<p>O mesmo que sua RAM</p>
+<p>/mnt</p>
+<p>/dev/partição_raiz</p>
+<p>Restante do Disco</p>
+<p><strong>Uefi com GPT</strong></p>
+<p>Ponto de montagem</p>
+<p>Partição</p>
+<p>Tamanho sugerido</p>
+<p>/mnt/efi</p>
+<p>/dev/partição_efi</p>
+<p>pelo menos 256 Mb</p>
+<p>[SWAP]</p>
+<p>/dev/partição_swap</p>
+<p>O mesmo que sua RAM</p>
+<p>/mnt</p>
+<p>/dev/partição_raiz</p>
+<p>Restante do Disco</p>
+<h3 id="Formatar-as-particoes"><a href="#Formatar-as-particoes" class="headerlink" title="Formatar as partições"></a>Formatar as partições</h3><p> Assim que você tenha criado todas as partições, cada uma deve ser formatada com um sistema de arquivos adequado. Por exemplo, se a partição raiz está em /dev/sda1 e receberá o sistema de arquivos ext4. Sabendo disso, execute:</p>
+<p><code># mkfs.ext4 /dev/partição_raiz</code></p>
+<p> Se você criou uma partição para SWAP (por exemplo, /dev/sda3), inicialize-a com os comandos:</p>
+<p><code># mkswap /dev/partição_swap</code><br><code># swapon /dev/partição_swap</code></p>
+<h3 id="Montando-as-particoes"><a href="#Montando-as-particoes" class="headerlink" title="Montando as partições"></a>Montando as partições</h3><hr>
+<p> Monte a partição raiz em /mnt. Por exemplo, se a partição raiz for <code>/dev/sda1</code>:</p>
+<pre><code># mount /dev/sda1 /mnt</code></pre>
+<p> Crie os pontos de montagem restantes (como /mnt/efi) usando o comando <code>mkdir</code> e monte suas partições.</p>
+<hr>
+<h2 id="Instalacao"><a href="#Instalacao" class="headerlink" title="Instalação"></a>Instalação</h2><h3 id="Instalar-os-pacotes-essenciais"><a href="#Instalar-os-pacotes-essenciais" class="headerlink" title="Instalar os pacotes essenciais"></a>Instalar os pacotes essenciais</h3><p> Use o <code>pacstrap</code> para instalar o pacote base, um kernel e um firmware para hardwares comuns:</p>
+<pre><code># pacstrap /mnt base linux linux-firmware</code></pre>
+<h2 id="Configuracao-do-sistema"><a href="#Configuracao-do-sistema" class="headerlink" title="Configuração do sistema"></a>Configuração do sistema</h2><p><strong>Fstab</strong>  </p>
+<p> Gere o arquivo fstab executando o comando </p>
+<p><code># genfstab -U /mnt &gt;&gt; /mnt/etc/fstab</code></p>
+<p><strong>Chroot</strong>  </p>
+<p> “Transfira a consciência” para o seu novo sistema. Tudo que você fizer a partir de agora resultará no sistema final.</p>
+<pre><code># arch-chroot /mnt</code></pre>
+<p><strong>Fuso horário</strong></p>
+<p> Defina o fuso horário de acordo com a sua localização, por exemplo, para definir o fuso horário para o Recife:</p>
+<pre><code># ln -sf /usr/share/zoneinfo/America/Recife /etc/localtime</code></pre>
+<p> Execute o comando hwclock para gerar o arquivo /etc/adjtime</p>
+<pre><code># hwclock --systohc</code></pre>
+<p><strong>Localização</strong></p>
+<p> Edite o arquivo <code>/etc/locale.gen</code> e remova o <code>#</code> da linha <code>pt_BR.UTF-8 UTF-8</code>. após isso, gere os locales executando:</p>
+<pre><code># locale-gen</code></pre>
+<p> Crie o arquivo locale.gen para informar ao sistema que você precisa dele em português com o seguinte comando:</p>
+<pre><code># echo LANG=pt_BR.UTF-8 &gt;&gt; /etc/locale.conf</code></pre>
+<p> Se você quiser tornar a alteração do layout do teclado permanente, utilize o comando:</p>
+<pre><code>echo KEYMAP=seu_layout &gt;&gt; /etc/vconsole.conf</code></pre>
+<h5 id="obs-substitua-seu-layout-pelo-layout-do-seu-teclado-por-exemplo-echo-KEYMAP-br-abnt2-gt-gt-etc-vconsole-conf"><a href="#obs-substitua-seu-layout-pelo-layout-do-seu-teclado-por-exemplo-echo-KEYMAP-br-abnt2-gt-gt-etc-vconsole-conf" class="headerlink" title="obs: substitua seu_layout pelo layout do seu teclado, por exemplo: # echo KEYMAP=br-abnt2 &gt;&gt; /etc/vconsole.conf"></a>obs: substitua seu_layout pelo layout do seu teclado, por exemplo: <code># echo KEYMAP=br-abnt2 &gt;&gt; /etc/vconsole.conf</code></h5><hr>
+<p><strong>Configuração de rede</strong></p>
+<p> Escolha o nome do seu computador na rede:</p>
+<pre><code># echo umnomelegalaqui &gt;&gt; /etc/hostname</code></pre>
+<p> Adicione as entradas de rede ao arquivo /etc/hosts, para isso você irá precisar do nano <code># pacman -S nano</code>, após a instalação do nano ser concluida, digite o comando <code># nano /etc/hosts</code>.</p>
+<p> Agora adicione as entradas correspondentes no arquivo:</p>
+<p>127.0.0.1      localhost.localdomain     localhost</p>
+<p>`</p>
+<p>::1        localhost.localdomain      localhost</p>
+<p>127.0.1.1    meuhostname.localdomain      meuhostname</p>
+<p>`</p>
+<hr>
+<p><strong>Senha do usuário root</strong></p>
+<p> Este passo é muito importante. Caso você ignore-o, não conseguirá fazer login no seu sistema. Você deve digitar o comando <code># passwd</code>, e escolher uma senha para o superusuário, não esqueça esta senha, ela será de extrema importância.</p>
+<hr>
+<p><strong>Gerenciador de boot</strong></p>
+<p> Existem vários gerenciadores de boot, tais como Clover, GRUB, Syslinux, systemd-boot, entre outros, mais iremos instalar o mais comum entre distros Linux, o <strong>GRUB.</strong></p>
+<hr>
+<h3 id="Grub-em-maquinas-Bios-Legacy"><a href="#Grub-em-maquinas-Bios-Legacy" class="headerlink" title="Grub em máquinas Bios Legacy"></a>Grub em máquinas Bios Legacy</h3><p> Para Instalar o GRUB na sua máquina, digite os seguintes comandos:</p>
+<pre><code># pacman -S grub</code></pre>
+<p> O comando acima instala o pacote do GRUB, mas para instalá-lo na MBR, utilize o seguinte comando, substituindo sdX pela partição raiz do seu sistema.</p>
+<pre><code># grub-install --target=i386-pc /dev/sdX</code></pre>
+<p> Perfeito! O GRUB está instalado, porém não está configurado. Irei ensinar como configurar um pouco mais abaixo.</p>
+<hr>
+<h3 id="GRUB-em-sistema-UEFI"><a href="#GRUB-em-sistema-UEFI" class="headerlink" title="GRUB em sistema UEFI"></a>GRUB em sistema UEFI</h3><p> Para instalar o Grub em sua máquina UEFI, você irá precisar de 2 pacotes, o <code>grub</code> e o <code>efibootmgr</code>, você pode instalá-los com o seguinte comando:</p>
+<pre><code># pacman -S grub efibootmgr</code></pre>
+<p> Para instalar o grub num sistema UEFI, você deve ter montado a partição EFI. Sendo assim, use o seguinte comando, e substitua <code>esp</code> pelo seu ponto de montagem:</p>
+<pre><code># grub-install --target=x86_64-efi --efi-directory=esp --bootloader-id=GRUB</code></pre>
+<h2 id="Configuracao-do-Grub-BIOS-EFI"><a href="#Configuracao-do-Grub-BIOS-EFI" class="headerlink" title="Configuração do Grub BIOS/EFI"></a>Configuração do Grub BIOS/EFI</h2><p> Sem este arquivo de configuração você receberá uma tela como esta se reiniciar: </p>
+<p><img src="https://www.blogdainformatica.com.br/wp-content/uploads/2015/10/Grub-Reinstalando-Corrigindo-Atualizando.jpg" alt="Imagem demonstrando a tela de Grub Rescue"></p>
+<p> Para que isso não aconteça, você deve gerar o arquivo de configuração, usando o comando:</p>
+<pre><code># grub-mkconfig -o /boot/grub/grub.cfg</code></pre>
+<h2 id="Grub-instalado-mas…-e-a-internet"><a href="#Grub-instalado-mas…-e-a-internet" class="headerlink" title="Grub instalado, mas… e a internet ?"></a>Grub instalado, mas… e a internet ?</h2><p> Você instalou o Grub com sucesso, mais caso reiniciasse agora, não teria acesso a internet. Para contornar isso, execute:</p>
+<pre><code># pacman -S networkmanager network-manager-applet &amp;&amp; systemctl enable NetworkManager</code></pre>
+<hr>
+<p><strong>Parabéns!</strong><br> Você acaba de concluir a instalação do Arch Linux! Agora, você pode sair do ambiente de chroot, pressionando <code>ctrl + D</code>, e digitando reboot. Você pode, e deve remover o pendrive do seu computador, e se necessário, configurar a BIOS/UEFI.</p>
+<p>Artigo escrito por: Redson</p>
+<p>Revisado por: Daki e Kyu</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Por favor, ative o JavaScript para visualizar o conteúdo.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Início</a></li>
+         
+          <li><a href="/about/">Sobre</a></li>
+         
+          <li><a href="/archives/">Artigos</a></li>
+         
+          <li><a href="/projects_url">Projetos</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Vale-ressaltar-que"><span class="toc-number">1.</span> <span class="toc-text">Vale ressaltar que</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Baixando-a-ISO-de-instalacao"><span class="toc-number">2.</span> <span class="toc-text">Baixando a ISO de instalação</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Iniciando-o-ambiente-em-modo-live"><span class="toc-number">3.</span> <span class="toc-text">Iniciando o ambiente em modo live</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Definindo-o-Layout-do-teclado"><span class="toc-number">4.</span> <span class="toc-text">Definindo o Layout do teclado:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conectar-a-internet"><span class="toc-number">5.</span> <span class="toc-text">Conectar à internet</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Atualizar-o-Relogio-do-sistema"><span class="toc-number">5.0.1.</span> <span class="toc-text">Atualizar o Relógio do sistema</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Particionamento"><span class="toc-number">6.</span> <span class="toc-text">Particionamento</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Formatar-as-particoes"><span class="toc-number">6.1.</span> <span class="toc-text">Formatar as partições</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Montando-as-particoes"><span class="toc-number">6.2.</span> <span class="toc-text">Montando as partições</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Instalacao"><span class="toc-number">7.</span> <span class="toc-text">Instalação</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Instalar-os-pacotes-essenciais"><span class="toc-number">7.1.</span> <span class="toc-text">Instalar os pacotes essenciais</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Configuracao-do-sistema"><span class="toc-number">8.</span> <span class="toc-text">Configuração do sistema</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#obs-substitua-seu-layout-pelo-layout-do-seu-teclado-por-exemplo-echo-KEYMAP-br-abnt2-gt-gt-etc-vconsole-conf"><span class="toc-number">8.0.0.1.</span> <span class="toc-text">obs: substitua seu_layout pelo layout do seu teclado, por exemplo: # echo KEYMAP&#x3D;br-abnt2 &gt;&gt; &#x2F;etc&#x2F;vconsole.conf</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Grub-em-maquinas-Bios-Legacy"><span class="toc-number">8.1.</span> <span class="toc-text">Grub em máquinas Bios Legacy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GRUB-em-sistema-UEFI"><span class="toc-number">8.2.</span> <span class="toc-text">GRUB em sistema UEFI</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Configuracao-do-Grub-BIOS-EFI"><span class="toc-number">9.</span> <span class="toc-text">Configuração do Grub BIOS&#x2F;EFI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Grub-instalado-mas%E2%80%A6-e-a-internet"><span class="toc-number">10.</span> <span class="toc-text">Grub instalado, mas… e a internet ?</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://blog.worldoflinux.xyz/2020/11/28/arch/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://blog.worldoflinux.xyz/2020/11/28/arch/&text=Instalação Arch Linux"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://blog.worldoflinux.xyz/2020/11/28/arch/&title=Instalação Arch Linux"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.worldoflinux.xyz/2020/11/28/arch/&is_video=false&description=Instalação Arch Linux"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Instalação Arch Linux&body=Check out this article: http://blog.worldoflinux.xyz/2020/11/28/arch/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://blog.worldoflinux.xyz/2020/11/28/arch/&title=Instalação Arch Linux"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://blog.worldoflinux.xyz/2020/11/28/arch/&title=Instalação Arch Linux"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://blog.worldoflinux.xyz/2020/11/28/arch/&title=Instalação Arch Linux"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://blog.worldoflinux.xyz/2020/11/28/arch/&title=Instalação Arch Linux"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://blog.worldoflinux.xyz/2020/11/28/arch/&name=Instalação Arch Linux&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://blog.worldoflinux.xyz/2020/11/28/arch/&t=Instalação Arch Linux"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartilhar</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2020
+    Lin Diniz
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Início</a></li>
+         
+          <li><a href="/about/">Sobre</a></li>
+         
+          <li><a href="/archives/">Artigos</a></li>
+         
+          <li><a href="/projects_url">Projetos</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TTGLCK5TH5"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-TTGLCK5TH5');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'worldoflinux-1';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>
