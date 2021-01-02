@@ -1,3 +1,8 @@
+---
+title: Drivers Nvidia no FreeBSD
+date: 2021/01/02
+author: Drack
+---
 # Drivers Nvidia no FreeBSD
 
 Se você estiver seguindo o manual de configuração do Xorg, ignore o que o manual diz sobre a execução do Xorg -configure.
