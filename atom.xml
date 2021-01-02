@@ -6,7 +6,7 @@
   <link href="http://blog.worldoflinux.xyz/atom.xml" rel="self"/>
   
   <link href="http://blog.worldoflinux.xyz/"/>
-  <updated>2021-01-02T16:20:19.047Z</updated>
+  <updated>2021-01-02T16:23:38.553Z</updated>
   <id>http://blog.worldoflinux.xyz/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
+    <title>Drivers Nvidia no FreeBSD</title>
     <link href="http://blog.worldoflinux.xyz/2021/01/02/Nvidia-Drivers/"/>
     <id>http://blog.worldoflinux.xyz/2021/01/02/Nvidia-Drivers/</id>
-    <published>2021-01-02T16:20:19.047Z</published>
-    <updated>2021-01-02T16:20:19.047Z</updated>
+    <published>2021-01-02T03:00:00.000Z</published>
+    <updated>2021-01-02T16:23:38.553Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Drivers-Nvidia-no-FreeBSD"><a href="#Drivers-Nvidia-no-FreeBSD" class="headerlink" title="Drivers Nvidia no FreeBSD"></a>Drivers Nvidia no FreeBSD</h1><p>Se você estiver seguindo o manual de configuração do Xorg, ignore o que o manual diz sobre a execução do Xorg -configure.</p><p>Não execute o Xorg -configure</p><p>Se você já seguiu o manual e criou um xorg.conf, certifique-se de remover /etc/X11/xorg.conf ou /usr/local/etc/X11/xorg.conf antes de prosseguir:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rm -f &#x2F;etc&#x2F;X11&#x2F;xorg.conf &#x2F;usr&#x2F;local&#x2F;etc&#x2F;X11&#x2F;xorg.conf</span><br></pre></td></tr></table></figure><h2 id="Instalando-os-drivers-nvidia"><a href="#Instalando-os-drivers-nvidia" class="headerlink" title="Instalando os drivers nvidia:"></a>Instalando os drivers nvidia:</h2><p>1 - Instale  x11/nvidia-driver</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pkg install nvidia-driver</span><br></pre></td></tr></table></figure><p>Para algumas placas mais antigas, você precisa usar x11/nvidia-driver-340 ou x11/nvidia-driver-304.</p><p>Consulte a página de download da NVIDIA para ver qual versão do driver você precisa. Observe que não há necessidade (e é até contraproducente) baixar o driver dessa página.</p><p>2 - Execute</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$  sysrc kld_list+&#x3D;&quot;nvidia-modeset&quot;</span><br></pre></td></tr></table></figure><p> Para adicionar uma entrada a /etc/rc.conf para carregar os módulos do kernel na inicialização.</p><p>nvidia-modeset está disponível apenas para versões de driver &gt;= 358.009, se você usar uma versão mais antiga, use <code> sysrc kld_list+=&quot;nvidia&quot;</code>.</p><p>3 - Reinicialize com <code>shutdown -r now</code> ou carregue os módulos de kernel necessários agora com <code>kldload nvidia-modeset</code> ou <code>kldload nvidia</code></p><p>4 - Crie o diretório:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir -p &#x2F;usr&#x2F;local&#x2F;etc&#x2F;X11&#x2F;xorg.conf.d</span><br></pre></td></tr></table></figure><p>5 - Use seu editor de texto no /usr/local/etc/X11/xorg.conf.d/driver-nvidia.conf com o script abaixo:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Section &quot;Device&quot;</span><br><span class="line">        Identifier &quot;NVIDIA Card&quot;</span><br><span class="line">        VendorName &quot;NVIDIA Corporation&quot;</span><br><span class="line">        Driver &quot;nvidia&quot;</span><br><span class="line">EndSection</span><br></pre></td></tr></table></figure><p>6 - Reinicialize</p>]]></content>
     
@@ -286,26 +286,6 @@
       
     <summary type="html">&lt;p&gt;Saudações, hoje iremos aprender um pouco sobre o Yay e sua instalação.&lt;/p&gt;
 &lt;h2 id=&quot;Yay-O-que-e&quot;&gt;&lt;a href=&quot;#Yay-O-que-e&quot; class=&quot;headerlink&quot;</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Instalação Artix Linux no Modo full hipster (Zfs na raiz)</title>
-    <link href="http://blog.worldoflinux.xyz/2020/11/28/artixmodofullhipster/"/>
-    <id>http://blog.worldoflinux.xyz/2020/11/28/artixmodofullhipster/</id>
-    <published>2020-11-28T03:00:00.000Z</published>
-    <updated>2020-12-24T21:45:40.730Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="O-que-e-o-Artix"><a href="#O-que-e-o-Artix" class="headerlink" title="O que é o Artix"></a>O que é o Artix</h1><p>O Artix Linux é uma distribuição baseada em Arch Linux que visa rodar o sistema sem o famoso systemd, os sistemas de<br>arquvos suportados são:</p><h2 id="Openrc"><a href="#Openrc" class="headerlink" title="Openrc"></a>Openrc</h2><ul><li>O OpenRC é um sistema init baseado em dependência. Foi criado por Roy Marples, um desenvolvedor do NetBSD que também estava ativo no projeto Gentoo. </li></ul><h2 id="Runit"><a href="#Runit" class="headerlink" title="Runit"></a>Runit</h2><ul><li>Criado por Gerrit Pape, usado no open bsd e mais notoramente no Void Linux, ele visa iniciar o sistema e desligar o mesmo com apenas 3 fases </li></ul><h2 id="s6"><a href="#s6" class="headerlink" title="s6"></a>s6</h2><ul><li>Esse é o menos utilizado pois nada passa de uma modificação do runit feito para facilitar o uso do mesmo</li></ul><h1 id="Modo-full-hipster"><a href="#Modo-full-hipster" class="headerlink" title="Modo full hipster"></a>Modo full hipster</h1><p>O modo full hipster consite em: </p><blockquote><p>Instalar o Sistema pelo terminal (Nada de instalador gráfico)<br>Instalar o Sistema o mais rápido possivel (modo speedrun)<br>Instalar o Sistema sobre o sistema de arquivos ZFS</p></blockquote>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;O-que-e-o-Artix&quot;&gt;&lt;a href=&quot;#O-que-e-o-Artix&quot; class=&quot;headerlink&quot; title=&quot;O que é o Artix&quot;&gt;&lt;/a&gt;O que é o Artix&lt;/h1&gt;&lt;p&gt;O Artix Linux é um</summary>
       
     
     
