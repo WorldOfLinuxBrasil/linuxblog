@@ -1,0 +1,174 @@
+#+TITLE: Artix full  hipster
+#+AUTHOR: Lin Diniz
+#+LAYOUT: post
+#+DATE: <2021-01-06 Wed>
+* O que é o modo full hipster kk
+o modo full hipster consite em você instalar o artix linux no seu purismo em cima de um sistema de arquivos zfs (Zetabyte File System) cirado pela sun microsystems
+** Mas pra que usar o modo full hipser?
+ Siceramente nem eu sei, mas legal aprender porque o zfs é muito utilizado para servidores e cada conhecimenteo conta
+** Pronto quero instalar essa merda, o que preciso?
++ Você vai precisar das seguintes peripercias:
++ Um computador (kk claro ne)
++ Um pendrive com uma iso especial
++ Conexão com a net
++ Farinha agua e tempero👍
+* Como instalo a bagaça?
+Boa sorte kk
+** Baixando a iso
+
+entre Aki para baixar a iso feita por mim 😉 hehe, você deve baixar a versão mais nova e compativel com o init sytem que quer no caso:
+
++  Runit
++ OpenRC
++ s6
+depois passe a iso para o pendrive do seu jeito favorito ex: Etcher
+** Instalando o sistema
+Verificando se o modulo zfs foi carrgado
++ Primeiro verifique se o zfs está carregado, no caso se baixo iso certamente poderá dar o seguintes comandos:
+  #+begin_src shell
+zfs --version
+modfinfo zfs
+  #+end_src
+Se deu algum tipo de error é porque você não baixou a iso certa (Ou seja: a do meu site kk)
+**  Particionando o sitema
+*Aviso* rápido No meu caso instarei num sistema UEFI mas se você for instalar em um sistema bios é só não instalar a partição EFI e instalar o grub normalmente
++ Esquema de partições
+  #+begin_src shell
+/dev/sda1 /boot/efi (Formatado com vfat) [500MB]
+/dev/sda2 /boot (Formatado com vfat) [1GB]
+/dev/sda3 swap [Dobro da ram]
+/dev/sda4 / [O resto]
+  #+end_src
+*Nota* A swap é importante pois o zfs consome bastante ram
+ Use o fdisk ou qualquer ferramenta de partições contanto que siga o schema
+ + Checkando as partições
+   Dé um:
+   #+begin_src shell
+lsblk
+   #+end_src
+**  Formatando as partições
+*** Partições normais
+#+begin_src shell
+mkfs.fat -F32 /dev/sda1
+mkfs.fat -F32 /dev/sda2
+mkswap /dev/sda3
+#+end_src
+*** Criando pool e datasets
+#+begin_src shell
+zpool create -o ashift=12 zroot /dev/sda2
+zfs set atime=off zroot
+zfs set relatime=on zroot
+zfs create -o compression=lz4 -o mountpoint=none zroot/ROOT
+zfs create -o compression=lz4 -o mountpoint=/ zroot/ROOT/default
+zfs create -o compression=lz4 -o mountpoint=none zroot/HOME
+zfs create -o compression=lz4 -o mountpoint=/home/{USUARIO} zroot/HOME/{USUARIO}
+#+end_src
+**** Etapas importantes
+Você precisa setar:
+***** A zroot com boot pool
+#+begin_src shell
+zpool set bootfs=zroot/ROOT/default zroot
+#+end_src
+***** O arquivo de cache zfs
+#+begin_src shell
+zpool set cachefile=/etc/zfs/zpool.cache zroot
+#+end_src
+** Exportando, importando e montando
+*** Exportando a pool
+precisamos exportar a pool para não ter problemas ao inciar o sistema, simplesmente dê o comando:
+#+begin_src shell
+zpool export zroot
+#+end_src
+*** Importando a pool com o ponto de montagem /mnt
+agora é necessario importar a pool para que podermos montar-la em /mnt
+#+begin_src shell
+zpool import -d /dev/sda4 -R /mnt zroot
+#+end_src
+*** Montando partições normais dentro do /mnt
+Agora montaremos as partições não zfs
+#+begin_src shell
+Agora montaremos as partições não zfs
+#+end_src
+** Instalando sistema base
+*** Instalado pacotes do sistma base
+Aqui você tem 3 escolhas de init system (openrc, runit e s6)
+**** Instalando sistema base com openRC
+#+begin_src shell
+basestrap /mnt base base-devel openrc linux linux-firmware
+#+end_src
+**** Instalando sistema base com runit
+#+begin_src shell
+basestrap /mnt base base-devel runit elogind-runit linux linux-firmware
+#+end_src
+**** Instalando sistema base com s6
+#+begin_src shell
+basestrap /mnt base base-devel s6 elogind-s6 linux linux-firmware
+#+end_src
+*** Gerando fstab
+ para gerar o fstab para montar as partições de boot quando o sistema incializar
+ #+begin_src shell
+fstabgen -U /mnt >> /mnt/etc/fstab
+ #+end_src
+** Entrando no chroot no sitema a ser instalado
+#+begin_src shell
+artools-chroot /mnt
+#+end_src
+** Trocando senha de root
+#+begin_src shell
+passwd
+#+end_src
+** Instalando zfs no sistema novo (a parte dificil)
+*** Instalando repositorio do zfs
+abra o arquivo */etc/pacman/pacman.conf* e coloque as seguintes linhas na parte dos repositorios
+#+begin_src shell
+[archzfs-testing]
+ Server = https://archzfs.com/$repo/$arch
+#+end_src
+*** Instalando a chave do repositorio
+#+begin_src shell
+curl https://archzfs.com/archzfs.gpg > archzfs.gpg
+pacman-key -a archzfs.gpg
+pacman-key --init
+pacman-key --populate artix
+pacman-key -r F75D9D76
+pacman-key --lsign-key F75D9D76
+#+end_src
+*** Instalndo zfs-dkms e linux headers
+#+begin_src shell
+pacman -Sy linux-headers zfs-dkms
+#+end_src
+*** Adicionando hook no mkinitpcio
+#+begin_src shell
+pacman -S vim
+vim /etc/mkinitpcio.conf
+#+end_src
++ Deixe o arquivo assim:
+  #+begin_src shell
+HOOKS=(base udev autodetect modconf block filesystems keyboard fsck zfs filesystems)
+  #+end_src
+**** Compilando mkinitpcio
+#+begin_src shell
+mkinitpcio -p linux
+#+end_src
+** Instalando bootloader e gerenciador de rede
+ No meu caso estarei usando runit mas se você estiver usando outro presumo que saiba como subir o serviço depois que o sistema estiver instalado
+*** Instalando bootloader
+#+begin_src shell
+pacman -S grub efibootmgr
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=artixzfs
+grub-mkconfig -o /boot/grub/grub.cfg
+#+end_src
+*** Instalando NetworkManager
+#+begin_src shell
+pacman -S networkmanager networkmanager-runit
+#+end_src
+* Dando boot
+cruze os dedos e dê boot o sistema deve inciar normal *JÁ SEGUIU AS ETAPAS RIGOROSAMENTE*
+** Habilitando rede
+#+begin_src shell
+ln -s /etc/runit/sv/NetworkManager /run/runit/service
+#+end_src
+***  e se quiser conectar na wifi
+nmtui
+#+begin_src shell
+#+end_src
