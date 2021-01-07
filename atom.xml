@@ -6,7 +6,7 @@
   <link href="http://blog.worldoflinux.xyz/atom.xml" rel="self"/>
   
   <link href="http://blog.worldoflinux.xyz/"/>
-  <updated>2021-01-06T23:47:47.399Z</updated>
+  <updated>2021-01-07T15:34:13.274Z</updated>
   <id>http://blog.worldoflinux.xyz/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Como usar o runit Init system</title>
+    <link href="http://blog.worldoflinux.xyz/2021/01/07/runitch/"/>
+    <id>http://blog.worldoflinux.xyz/2021/01/07/runitch/</id>
+    <published>2021-01-07T00:00:00.000Z</published>
+    <updated>2021-01-07T15:34:13.274Z</updated>
+    
+    <content type="html"><![CDATA[<div id="content"><div id="outline-container-org88fc46c" class="outline-2"><h2 id="org88fc46c">O que &#xE9; runit</h2><div class="outline-text-2" id="text-org88fc46c"><p>runit &#xE9; um esquema init para sistemas operacionais do tipo Unix que inicializa, supervisiona e termina processos em todo o sistema operacional.</p></div></div><div id="outline-container-org76b13c0" class="outline-2"><h2 id="org76b13c0">Como usar essa baga&#xE7;a</h2><div class="outline-text-2" id="text-org76b13c0"></div><div id="outline-container-orgaeac2c7" class="outline-3"><h3 id="orgaeac2c7">Habilitando um servi&#xE7;o</h3><div class="outline-text-3" id="text-orgaeac2c7"><p>antes de subir um servi&#xE7;o &#xE9; necessario habilitar-lo para que possa ativar no momento do boot e que possa ser gerenciado pelo comando sv, para habilitar um servi&#xE7;o com runit d&#xEA;</p><div class="org-src-container"><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ln -s /etc/runit/sv/&lt;Nome Do Servi&#xE7;o&gt; /run/runit/service</span><br></pre></td></tr></table></figure></div></div></div><div id="outline-container-orge9fae86" class="outline-3"><h3 id="orge9fae86">Controlando o servi&#xE7;o</h3><div class="outline-text-3" id="text-orge9fae86"><ul class="org-ul"><li><p>para inicia-lo <b>Nota: quando o servi&#xE7;o for habilitado ele inicia automaticamente</b></p><div class="org-src-container"><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sv start &lt;Nome Do Servi&#xE7;o&gt;</span><br></pre></td></tr></table></figure></div></li><li><p>para para-lo</p><div class="org-src-container"><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sv stop &lt;Nome Do Servi&#xE7;o&gt;</span><br></pre></td></tr></table></figure></div></li><li><p>para verificar o status do mesmo</p><div class="org-src-container"><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sv status &lt;Nome Do Servi&#xE7;o&gt;</span><br></pre></td></tr></table></figure></div></li><li><p>para reiniciar-lo</p><div class="org-src-container"><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sv restart &lt;Nome Do Servi&#xE7;o&gt;</span><br></pre></td></tr></table></figure></div></li></ul></div><div id="outline-container-org575eb08" class="outline-4"><h4 id="org575eb08">Desabilitando servi&#xE7;o no boot</h4><div class="outline-text-4" id="text-org575eb08"><p>Para desabilitar um acesso no boot simplesmente crie um arquivo chamado <b>down</b> na pasta do programa em quest&#xE3;o, exemplo:</p><div class="org-src-container"><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">touch /etc/runit/sv/&lt;Nome Do Servi&#xE7;o&gt;/down</span><br></pre></td></tr></table></figure></div></div></div></div><div id="outline-container-org3225f73" class="outline-3"><h3 id="org3225f73">Monitrando o sistema</h3><div class="outline-text-3" id="text-org3225f73"></div><div id="outline-container-org4c605da" class="outline-4"><h4 id="org4c605da">Ver o status de todos os servi&#xE7;os</h4><div class="outline-text-4" id="text-org4c605da"><div class="org-src-container"><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sv status /var/service/*</span><br></pre></td></tr></table></figure></div></div></div><div id="outline-container-org746a3dd" class="outline-4"><h4 id="org746a3dd">Vendo &#xE1;rvore de inicializa&#xE7;&#xE3;o</h4><div class="outline-text-4" id="text-org746a3dd"><p>Primeiro instale o comando tree do seu gerenciador de pacotes e ent&#xE3;o</p><div class="org-src-container"><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tree /etc/runit/sv/servicedir</span><br></pre></td></tr></table></figure></div><p>Voc&#xEA; ver&#xE1; um output semelhante &#xE0;:</p><div class="org-src-container"><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">servicedir</span><br><span class="line">&#x251C;&#x2500;&#x2500; run (755)</span><br><span class="line">&#x251C;&#x2500;&#x2500; check (755)</span><br><span class="line">&#x251C;&#x2500;&#x2500; conf (644)</span><br><span class="line">&#x251C;&#x2500;&#x2500; finish (755)</span><br><span class="line">&#x2514;&#x2500;&#x2500; <span class="built_in">log</span> (directory)</span><br><span class="line">    &#x251C;&#x2500;&#x2500; config (644)</span><br><span class="line">    &#x2514;&#x2500;&#x2500; run (755)</span><br></pre></td></tr></table></figure></div></div></div></div></div></div>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;div id=&quot;content&quot;&gt;
+&lt;div id=&quot;outline-container-org88fc46c&quot; class=&quot;outline-2&quot;&gt;
+&lt;h2 id=&quot;org88fc46c&quot;&gt;O que &amp;#xE9; runit&lt;/h2&gt;
+&lt;div class=&quot;outline</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>Artix full  hipster</title>
